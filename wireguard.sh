@@ -19,22 +19,23 @@ fi
  
 # Detect OS
 # $os_version variables aren't always in use, but are kept here for convenience
-if grep -qs "ubuntu" /etc/os-release; then
-	os="ubuntu"
-	os_version=$(grep 'VERSION_ID' /etc/os-release | cut -d '"' -f 2 | tr -d '.')
-elif [[ -e /etc/debian_version ]]; then
-	os="debian"
-	os_version=$(grep -oE '[0-9]+' /etc/debian_version | head -1)
-elif [[ -e /etc/centos-release ]]; then
+#if grep -qs "ubuntu" /etc/os-release; then
+#	os="ubuntu"
+#	os_version=$(grep 'VERSION_ID' /etc/os-release | cut -d '"' -f 2 | tr -d '.')
+#elif [[ -e /etc/debian_version ]]; then
+#	os="debian"
+#	os_version=$(grep -oE '[0-9]+' /etc/debian_version | head -1)
+#elif [[ -e /etc/centos-release ]]; then
 	os="centos"
-	os_version=$(grep -oE '[0-9]+' /etc/centos-release | head -1)
-elif [[ -e /etc/fedora-release ]]; then
-	os="fedora"
-	os_version=$(grep -oE '[0-9]+' /etc/fedora-release | head -1)
-else
-	echo "This installer seems to be running on an unsupported distribution. Supported distributions are Ubuntu, Debian, CentOS, and Fedora."
-	exit
-fi
+	os_version=9
+#	os_version=$(grep -oE '[0-9]+' /etc/centos-release | head -1)
+#elif [[ -e /etc/fedora-release ]]; then
+#	os="fedora"
+#	os_version=$(grep -oE '[0-9]+' /etc/fedora-release | head -1)
+#else
+#	echo "This installer seems to be running on an unsupported distribution. Supported distributions are Ubuntu, Debian, CentOS, and Fedora."
+#	exit
+#fi
 
 if [[ "$os" == "ubuntu" && "$os_version" -lt 1804 ]]; then
 	echo "Ubuntu 18.04 or higher is required to use this installer. This version of Ubuntu is too old and unsupported."
